@@ -142,10 +142,14 @@ export const content = {
     eyebrow: "Testimonios",
     title: "Lo que dicen nuestros clientes",
     placeholderBadge: "Ejemplo",
+    placeholderNote:
+      "Vista de desarrollo: estos testimonios son de ejemplo y no se publican.",
   },
   faq: {
     eyebrow: "Preguntas frecuentes",
     title: "Antes de su consulta",
+    moreQuestions: "¿Tiene otra pregunta?",
+    moreQuestionsCta: { label: "Escríbanos", href: "/#contacto" },
   },
   contact: {
     eyebrow: "Contacto",

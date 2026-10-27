@@ -1,0 +1,63 @@
+---
+/*
+ * Testimonios. Reglas de visibilidad:
+ *  - En `npm run dev` siempre se ven, con la etiqueta "Ejemplo", para revisar el diseño.
+ *  - En producción solo si site.showTestimonials es true Y hay testimonios reales
+ *    (testimonials.ts ya filtra los de ejemplo en producción).
+ * Nunca se agregan como Review al JSON-LD.
+ */
+import { content, site } from "../data/site";
+import { practiceAreas } from "../data/practiceAreas";
+import { testimonials } from "../data/testimonials";
+import SectionTitle from "./ui/SectionTitle.astro";
+
+const { testimonials: text } = content;
+const visible =
+  (site.showTestimonials || import.meta.env.DEV) && testimonials.length > 0;
+const hasPlaceholders = testimonials.some((t) => t.isPlaceholder);
+
+const areaTitle = (id: string) =>
+  practiceAreas.find((area) => area.id === id)?.title ?? id;
+---
+
+{visible && (
+  <section
+    id="testimonios"
+    aria-labelledby="testimonios-titulo"
+    class="py-20 md:py-28"
+  >
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <SectionTitle
+        id="testimonios-titulo"
+        eyebrow={text.eyebrow}
+        title={text.title}
+        subtitle={hasPlaceholders ? text.placeholderNote : undefined}
+      />
+
+      <ul class="grid gap-6 md:grid-cols-3">
+        {testimonials.map((t) => (
+          <li class="reveal flex">
+            <figure class="flex w-full flex-col border border-azul/15 p-8">
+              <div class="flex items-center justify-between gap-4">
+                <p class="text-xs font-semibold tracking-[0.25em] text-dorado-oscuro uppercase">
+                  {areaTitle(t.area)}
+                </p>
+                {t.isPlaceholder && (
+                  <span class="border border-dorado-oscuro px-2 py-0.5 text-xs font-semibold text-dorado-oscuro">
+                    {text.placeholderBadge}
+                  </span>
+                )}
+              </div>
+              <blockquote class="mt-6 grow font-display text-2xl leading-snug text-azul">
+                <p>“{t.quote}”</p>
+              </blockquote>
+              <figcaption class="mt-6 border-t border-azul/10 pt-4 text-sm">
+                {t.name}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

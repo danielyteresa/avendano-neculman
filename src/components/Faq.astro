@@ -1,0 +1,56 @@
+---
+// Preguntas frecuentes con <details> nativo: se abren y cierran sin JavaScript,
+// funcionan con teclado y el lector de pantalla anuncia si están abiertas.
+import { content } from "../data/site";
+import { faq } from "../data/faq";
+import SectionTitle from "./ui/SectionTitle.astro";
+
+const { faq: text } = content;
+---
+
+<section
+  id="preguntas"
+  aria-labelledby="preguntas-titulo"
+  class="border-t border-azul/10 py-20 md:py-28"
+>
+  <div class="mx-auto max-w-3xl px-4 sm:px-6">
+    <SectionTitle
+      id="preguntas-titulo"
+      eyebrow={text.eyebrow}
+      title={text.title}
+    />
+
+    <div class="reveal border-t border-azul/15">
+      {faq.map((item) => (
+        <details class="group border-b border-azul/15">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 font-display text-xl font-semibold text-azul sm:text-2xl [&::-webkit-details-marker]:hidden">
+            {item.question}
+            {/* Signo + que se vuelve × al abrir. Sin transición: el estilo pide animar solo opacidad. */}
+            <svg
+              viewBox="0 0 24 24"
+              class="size-5 shrink-0 text-dorado-oscuro group-open:rotate-45"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </summary>
+          <p class="max-w-2xl pb-6 leading-relaxed">{item.answer}</p>
+        </details>
+      ))}
+    </div>
+
+    <p class="mt-10">
+      {text.moreQuestions}{" "}
+      <a
+        href={text.moreQuestionsCta.href}
+        class="font-semibold text-dorado-oscuro underline underline-offset-4 hover:text-azul"
+      >
+        {text.moreQuestionsCta.label}
+      </a>
+    </p>
+  </div>
+</section>
