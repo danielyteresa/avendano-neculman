@@ -18,11 +18,12 @@ const { street, unit, city, countryName } = site.address;
 /** Dirección en una línea, para mostrar: "Arturo Prat 696, oficina 321, Temuco, Chile". */
 export const fullAddress = `${street}, ${unit}, ${city}, ${countryName}`;
 
-// Para el mapa basta la calle y la ciudad: la oficina confunde a Google Maps.
-const mapQuery = encodeURIComponent(`${street}, ${city}, ${countryName}`);
+// Usamos las coordenadas de la ficha de Google: el pin cae justo en el edificio,
+// sin depender de que Google interprete bien la dirección escrita.
+const { lat, lng } = site.geo;
 
 /** Indicaciones en Google Maps hasta la oficina. */
-export const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
+export const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 
 /** Mapa de Google para el iframe (no necesita clave de API). */
-export const mapEmbedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+export const mapEmbedUrl = `https://www.google.com/maps?q=${lat},${lng}&z=17&output=embed`;

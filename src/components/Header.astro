@@ -16,7 +16,8 @@ const { header } = content;
 
 <header class="sticky top-0 z-40 bg-azul text-crema">
   <div class="mx-auto flex h-18 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-    <a href="/" aria-label={header.homeLabel} class="rounded-sm">
+    <!-- Sin aria-label: el nombre accesible es el mismo texto visible del logo. -->
+    <a href="/" class="rounded-sm">
       <Logo />
     </a>
 

@@ -5,7 +5,7 @@ import { site } from "./site";
  * BORRADOR para que las abogadas lo revisen y aprueben: ellas son las
  * responsables de los datos y conocen la Ley 19.628 y la Ley 21.719
  * (vigente desde el 1 de diciembre de 2026, salvo postergación).
- * Puntos a confirmar: plazo de conservación y cualquier otro uso de los datos.
+ * Plazo de conservación: un año (definido por el estudio).
  */
 
 export interface PrivacySection {
@@ -56,8 +56,7 @@ export const privacy = {
     {
       title: "Cuánto tiempo los guardamos",
       paragraphs: [
-        // TODO: confirmar el plazo con el estudio.
-        "Mientras sea necesario para responder su consulta. Si no llega a ser cliente del estudio, eliminamos sus datos dentro de los 6 meses siguientes a nuestro último contacto.",
+        "Mientras sea necesario para responder su consulta. Si no llega a ser cliente del estudio, eliminamos sus datos dentro de un año desde nuestro último contacto.",
       ],
     },
     {

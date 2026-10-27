@@ -40,6 +40,11 @@ export const site = {
     countryName: "Chile",
   },
 
+  /** Ubicación exacta de la ficha de Google Maps del estudio (Edificio Centenario). */
+  geo: { lat: -38.7403314, lng: -72.5910694 },
+  /** Enlace para compartir de Google Maps, entregado por el estudio. */
+  mapsUrl: "https://maps.app.goo.gl/DzK9RqikmprwfTMn7",
+
   hours: [
     {
       label: "Lunes a viernes",
@@ -96,7 +101,6 @@ export const content = {
   header: {
     cta: { label: "Agendar consulta", href: "/#contacto" },
     navLabel: "Principal",
-    homeLabel: "Avendaño & Neculman, ir al inicio",
     skipLink: "Saltar al contenido",
     openMenuLabel: "Abrir menú",
     closeMenuLabel: "Cerrar menú",

@@ -1,13 +1,16 @@
 ---
 import { Font } from "astro:assets";
 import { site } from "../data/site";
+import { practiceAreas } from "../data/practiceAreas";
+import { team } from "../data/team";
 import "../styles/global.css";
 
-// Versión mínima. En la fase 8 se agregan Open Graph y el JSON-LD LegalService.
 interface Props {
   /** Título de la pestaña. Si no se pasa, se usa el título SEO del estudio. */
   title?: string;
   description?: string;
+  /** Ruta de la imagen para redes sociales, dentro de public/. */
+  image?: string;
   /** true en páginas que no deben aparecer en Google (ej. /gracias). */
   noindex?: boolean;
 }
@@ -15,10 +18,78 @@ interface Props {
 const {
   title = site.title,
   description = site.description,
+  image = "/og-image.jpg",
   noindex = false,
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const homeUrl = new URL("/", Astro.site).href;
+const imageUrl = new URL(image, Astro.site);
+const firmId = `${homeUrl}#estudio`;
+
+/*
+ * Datos estructurados (JSON-LD): le dicen a Google que esto es un estudio
+ * jurídico (LegalService; el tipo Attorney está obsoleto), con su dirección,
+ * horario, redes y abogadas. Cada abogada es una Person enlazada con worksFor.
+ * Los testimonios NO se incluyen como Review mientras no sean reales.
+ */
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LegalService",
+      "@id": firmId,
+      name: site.fullName,
+      description: site.description,
+      url: homeUrl,
+      logo: imageUrl.href,
+      image: imageUrl.href,
+      telephone: site.contact.phone.replace(/\s/g, ""),
+      email: site.contact.email,
+      foundingDate: String(site.foundingYear),
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: `${site.address.street}, ${site.address.unit}`,
+        addressLocality: site.address.city,
+        addressRegion: site.address.region,
+        addressCountry: site.address.country,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: site.geo.lat,
+        longitude: site.geo.lng,
+      },
+      hasMap: site.mapsUrl,
+      openingHoursSpecification: site.hours.map((h) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: h.days,
+        opens: h.opens,
+        closes: h.closes,
+      })),
+      areaServed: site.areaServed,
+      knowsAbout: practiceAreas.map((area) => area.schemaName),
+      // Solo perfiles con URL completa: Google no acepta enlaces cortos de "compartir".
+      sameAs: site.social.flatMap((s) => (s.profileUrl ? [s.profileUrl] : [])),
+      employee: team.map((m) => ({ "@id": `${homeUrl}#${slug(m.name)}` })),
+    },
+    ...team.map((m) => ({
+      "@type": "Person",
+      "@id": `${homeUrl}#${slug(m.name)}`,
+      name: m.name,
+      jobTitle: m.jobTitle,
+      worksFor: { "@id": firmId },
+    })),
+  ],
+};
+
+/** "Laura Avendaño" → "laura-avendano" */
+function slug(text: string): string {
+  return text
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+}
 ---
 
 <!doctype html>
@@ -34,8 +105,29 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta name="theme-color" content="#0F1F3D" />
     <meta name="generator" content={Astro.generator} />
     {noindex && <meta name="robots" content="noindex" />}
+
+    <!-- Open Graph: cómo se ve el enlace al compartirlo en WhatsApp, Facebook, etc. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.fullName} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={site.fullName} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fuentes servidas desde el propio sitio; preload solo para la de títulos -->
     <Font cssVariable="--font-cormorant" preload />
-    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-inter" />
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
   </head>
   <body>
     <slot />
