@@ -1,0 +1,67 @@
+---
+interface Props {
+  /** id del h2, para que la sección lo use en aria-labelledby. */
+  id: string;
+  /** Etiqueta en versalitas sobre el título, como "ASESORÍA JURÍDICA TEMUCO" en el logo. */
+  eyebrow: string;
+  title: string;
+  /** Un solo párrafo corto, opcional. */
+  subtitle?: string;
+  align?: "left" | "center";
+  /** dark: para fondos azules (texto crema, etiqueta dorada). */
+  tone?: "light" | "dark";
+}
+
+const {
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  align = "left",
+  tone = "light",
+} = Astro.props;
+const dark = tone === "dark";
+---
+
+<div
+  class:list={[
+    "reveal mb-12 max-w-2xl",
+    align === "center" && "mx-auto text-center",
+  ]}
+>
+  <p
+    class:list={[
+      "text-xs font-semibold tracking-[0.25em] uppercase",
+      dark ? "text-dorado" : "text-dorado-oscuro",
+    ]}
+  >
+    {eyebrow}
+  </p>
+  <h2
+    id={id}
+    class:list={[
+      "mt-4 text-4xl leading-tight sm:text-5xl",
+      dark && "text-crema",
+    ]}
+  >
+    {title}
+  </h2>
+  <!-- Línea dorada decorativa: no lleva texto, así que no necesita contraste AA. -->
+  <span
+    aria-hidden="true"
+    class:list={[
+      "mt-6 block h-px w-16 bg-dorado",
+      align === "center" && "mx-auto",
+    ]}
+  ></span>
+  {subtitle && (
+    <p
+      class:list={[
+        "mt-6 text-lg leading-relaxed",
+        dark ? "text-crema/90" : "text-tinta/85",
+      ]}
+    >
+      {subtitle}
+    </p>
+  )}
+</div>

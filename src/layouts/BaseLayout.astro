@@ -1,0 +1,42 @@
+---
+import { Font } from "astro:assets";
+import { site } from "../data/site";
+import "../styles/global.css";
+
+// Versión mínima. En la fase 8 se agregan Open Graph y el JSON-LD LegalService.
+interface Props {
+  /** Título de la pestaña. Si no se pasa, se usa el título SEO del estudio. */
+  title?: string;
+  description?: string;
+  /** true en páginas que no deben aparecer en Google (ej. /gracias). */
+  noindex?: boolean;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  noindex = false,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0F1F3D" />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <Font cssVariable="--font-cormorant" preload />
+    <Font cssVariable="--font-inter" preload />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
