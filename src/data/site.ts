@@ -50,6 +50,9 @@ export const site = {
   ] satisfies OpeningHours[],
 
   modality: "Presencial en Temuco y online para todo Chile",
+
+  /** Valor de la primera consulta, en pesos chilenos (confirmado por el estudio). */
+  firstConsultationFee: 25000,
   areaServed: ["Temuco", "Chile"],
 
   social: [
@@ -158,6 +161,8 @@ export const content = {
       "Cuéntenos brevemente su caso y le respondemos en horario de oficina. Si prefiere, escríbanos por WhatsApp.",
     whatsappLabel: "Escríbanos por WhatsApp",
     whatsappMessage: "Hola, quisiera agendar una consulta con el estudio.",
+    infoTitle: "Datos de contacto",
+    whatsappTitle: "WhatsApp",
     phoneLabel: "Teléfono",
     emailLabel: "Correo",
     addressTitle: "Dirección",
@@ -183,8 +188,11 @@ export const content = {
       name: "Su nombre",
       email: "su@correo.cl",
       phone: "+56 9 1234 5678",
-      message: "No incluya datos sensibles; los conversaremos en la reunión.",
+      message: "Por ejemplo: quiero saber cómo pedir pensión de alimentos.",
     },
+    /** Aviso bajo el mensaje (no en el placeholder, que desaparece al escribir). */
+    messageHint:
+      "Basta con unas líneas. No incluya datos sensibles como diagnósticos o RUT; los conversaremos en la reunión.",
     areaPlaceholder: "Seleccione un área",
     areaOther: "Otro / no estoy seguro",
     modalities: [

@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Button from "../components/ui/Button.astro";
+import Icon from "../components/ui/Icon.astro";
+import { content } from "../data/site";
+import { whatsappUrl } from "../lib/links";
+
+// Netlify trae aquí al visitante después de enviar el formulario de contacto.
+const { thanks, contact } = content;
+---
+
+<BaseLayout title={thanks.pageTitle} description={thanks.message} noindex>
+  <Header />
+  <main id="contenido" tabindex="-1" class="outline-none">
+    <section
+      aria-labelledby="gracias-titulo"
+      class="mx-auto flex min-h-[70svh] max-w-2xl flex-col items-center justify-center px-4 py-20 text-center"
+    >
+      <p class="text-xs font-semibold tracking-[0.25em] text-dorado-oscuro uppercase">
+        {contact.eyebrow}
+      </p>
+      <h1 id="gracias-titulo" class="mt-4 text-5xl sm:text-6xl">
+        {thanks.title}
+      </h1>
+      <span aria-hidden="true" class="mt-6 block h-px w-16 bg-dorado"></span>
+      <p class="mt-6 text-lg leading-relaxed">{thanks.message}</p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <Button href="/">{thanks.backLabel}</Button>
+        <Button
+          href={whatsappUrl(contact.whatsappMessage)}
+          variant="outline"
+          target="_blank"
+          rel="noopener"
+        >
+          <Icon name="whatsapp" class="size-5" />
+          {contact.whatsappLabel}
+          <span class="sr-only">{contact.newTabNote}</span>
+        </Button>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

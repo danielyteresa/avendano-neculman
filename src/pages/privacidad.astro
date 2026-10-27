@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Button from "../components/ui/Button.astro";
+import { privacy } from "../data/privacy";
+---
+
+<BaseLayout title={privacy.pageTitle} description={privacy.description}>
+  <Header />
+  <main id="contenido" tabindex="-1" class="outline-none">
+    <article class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-28">
+      <p class="text-xs font-semibold tracking-[0.25em] text-dorado-oscuro uppercase">
+        {privacy.eyebrow}
+      </p>
+      <h1 class="mt-4 text-5xl leading-tight sm:text-6xl">{privacy.title}</h1>
+      <span aria-hidden="true" class="mt-6 block h-px w-16 bg-dorado"></span>
+      <p class="mt-6 text-sm">{privacy.updated}</p>
+      <p class="mt-8 text-lg leading-relaxed">{privacy.intro}</p>
+
+      {privacy.sections.map((section) => (
+        <section class="mt-12">
+          <h2 class="text-3xl">{section.title}</h2>
+          {"items" in section && section.items && (
+            <ul class="mt-4 list-disc space-y-2 pl-5 leading-relaxed marker:text-dorado-oscuro">
+              {section.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+          {section.paragraphs?.map((p) => (
+            <p class="mt-4 leading-relaxed">{p}</p>
+          ))}
+        </section>
+      ))}
+
+      <div class="mt-16">
+        <Button href={privacy.backHref} variant="outline">
+          {privacy.backLabel}
+        </Button>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

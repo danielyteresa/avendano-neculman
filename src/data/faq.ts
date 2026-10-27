@@ -1,13 +1,13 @@
+import { formatCLP } from "../lib/format";
+import { site } from "./site";
 import type { FaqItem } from "./types";
 
 // Preguntas frecuentes (opcional, ayuda al SEO). Las respuestas son un borrador:
-// no publicar precios ni plazos sin que las abogadas los confirmen.
+// no publicar plazos sin que las abogadas los confirmen.
 export const faq: FaqItem[] = [
   {
     question: "¿Cuánto cuesta la primera consulta?",
-    // TODO: confirmar con el estudio si la primera consulta tiene costo y cuánto.
-    answer:
-      "Le informamos el valor antes de agendar, para que no tenga sorpresas. Escríbanos y se lo indicamos.",
+    answer: `La primera consulta tiene un valor de ${formatCLP(site.firstConsultationFee)}. En ella revisamos su caso y le explicamos sus opciones.`,
   },
   {
     question: "¿Atienden fuera de Temuco?",

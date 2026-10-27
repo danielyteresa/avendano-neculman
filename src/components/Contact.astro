@@ -1,0 +1,285 @@
+---
+import { content, site } from "../data/site";
+import { practiceAreas } from "../data/practiceAreas";
+import {
+  directionsUrl,
+  emailHref,
+  fullAddress,
+  mapEmbedUrl,
+  phoneHref,
+  whatsappUrl,
+} from "../lib/links";
+import Button from "./ui/Button.astro";
+import Icon from "./ui/Icon.astro";
+import SectionTitle from "./ui/SectionTitle.astro";
+
+const { contact } = content;
+const { fields, placeholders } = contact;
+
+const labelClass = "mb-2 block text-sm font-semibold text-azul";
+// Borde azul al 60 %: así el contorno del campo llega a 3:1 sobre blanco (WCAG 1.4.11).
+const inputClass =
+  "w-full rounded-sm border border-azul/60 bg-white px-4 py-3 text-base text-tinta placeholder:text-tinta/70";
+const infoTitleClass =
+  "flex items-center gap-3 text-xs font-semibold tracking-[0.25em] text-dorado-oscuro uppercase";
+const infoLinkClass =
+  "underline-offset-4 hover:text-dorado-oscuro hover:underline";
+---
+
+<section
+  id="contacto"
+  aria-labelledby="contacto-titulo"
+  class="border-t border-azul/10 py-20 md:py-28"
+>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionTitle
+      id="contacto-titulo"
+      eyebrow={contact.eyebrow}
+      title={contact.title}
+      subtitle={contact.subtitle}
+    />
+
+    <div class="grid gap-16 lg:grid-cols-[3fr_2fr] lg:gap-20">
+      <!--
+        Netlify Forms: al desplegar, Netlify detecta este formulario por
+        data-netlify="true" y guarda cada envío en su panel; desde ahí se activa
+        el aviso por correo a la casilla del estudio. No hace falta backend.
+        La validación (required, type="email") la hace el navegador.
+      -->
+      <form
+        name={contact.formName}
+        method="POST"
+        action={contact.successPath}
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="reveal grid gap-6 sm:grid-cols-2"
+      >
+        <input type="hidden" name="form-name" value={contact.formName} />
+        <p class="hidden">
+          <label>
+            {contact.honeypotLabel}
+            <input name="bot-field" tabindex="-1" autocomplete="off" />
+          </label>
+        </p>
+
+        <p class="text-sm sm:col-span-2">{contact.requiredNote}</p>
+
+        <div class="sm:col-span-2">
+          <label for="nombre" class={labelClass}>
+            {fields.name} <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="nombre"
+            name="nombre"
+            type="text"
+            autocomplete="name"
+            required
+            placeholder={placeholders.name}
+            class={inputClass}
+          />
+        </div>
+
+        <div>
+          <label for="correo" class={labelClass}>
+            {fields.email} <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="correo"
+            name="correo"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder={placeholders.email}
+            class={inputClass}
+          />
+        </div>
+
+        <div>
+          <label for="telefono" class={labelClass}>
+            {fields.phone}
+          </label>
+          <input
+            id="telefono"
+            name="telefono"
+            type="tel"
+            autocomplete="tel"
+            placeholder={placeholders.phone}
+            class={inputClass}
+          />
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="area" class={labelClass}>
+            {fields.area} <span aria-hidden="true">*</span>
+          </label>
+          <select id="area" name="area" required class={inputClass}>
+            <option value="" disabled selected>
+              {contact.areaPlaceholder}
+            </option>
+            {practiceAreas.map((area) => (
+              <option value={area.id}>{area.title}</option>
+            ))}
+            <option value="otro">{contact.areaOther}</option>
+          </select>
+        </div>
+
+        <!-- fieldset + legend: el lector de pantalla lee la pregunta junto a cada opción. -->
+        <fieldset class="sm:col-span-2">
+          <legend class={labelClass}>
+            {fields.modality} <span aria-hidden="true">*</span>
+          </legend>
+          <div class="flex flex-col gap-3 sm:flex-row sm:gap-8">
+            {contact.modalities.map((m, index) => (
+              <label class="flex cursor-pointer items-center gap-3">
+                <input
+                  type="radio"
+                  name="modalidad"
+                  value={m.value}
+                  required={index === 0}
+                  class="size-5 accent-azul"
+                />
+                {m.label}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <div class="sm:col-span-2">
+          <label for="mensaje" class={labelClass}>
+            {fields.message} <span aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            rows="5"
+            required
+            aria-describedby="mensaje-ayuda"
+            placeholder={placeholders.message}
+            class={inputClass}
+          ></textarea>
+          <p id="mensaje-ayuda" class="mt-2 text-sm">
+            {contact.messageHint}
+          </p>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label class="flex cursor-pointer items-start gap-3 text-sm">
+            <input
+              type="checkbox"
+              name="acepta-privacidad"
+              value="si"
+              required
+              class="mt-0.5 size-5 shrink-0 accent-azul"
+            />
+            <span>
+              {contact.privacy.before}
+              <a
+                href={contact.privacy.href}
+                class="font-semibold text-dorado-oscuro underline underline-offset-4 hover:text-azul"
+              >
+                {contact.privacy.linkLabel}
+              </a>
+              {contact.privacy.after}
+              <span aria-hidden="true">*</span>
+            </span>
+          </label>
+        </div>
+
+        <div class="sm:col-span-2">
+          <button
+            type="submit"
+            class="w-full rounded-sm border border-azul bg-azul px-6 py-3 text-sm font-semibold tracking-wide text-fondo transition-colors hover:bg-tinta sm:w-auto"
+          >
+            {contact.submitLabel}
+          </button>
+        </div>
+      </form>
+
+      <!-- Datos de contacto y mapa -->
+      <div class="reveal space-y-10">
+        <h3 class="sr-only">{contact.infoTitle}</h3>
+        <!-- Cada <dt> lleva su ícono; el <dd> se alinea con el texto, no con el ícono. -->
+        <dl class="space-y-6">
+          <div>
+            <dt class={infoTitleClass}>
+              <Icon name="whatsapp" class="size-5" />
+              {contact.whatsappTitle}
+            </dt>
+            <dd class="mt-1 pl-8">
+              <a
+                href={whatsappUrl(contact.whatsappMessage)}
+                target="_blank"
+                rel="noopener"
+                class={infoLinkClass}
+              >
+                {site.contact.phone}
+                <span class="sr-only">{contact.newTabNote}</span>
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class={infoTitleClass}>
+              <Icon name="phone" class="size-5" />
+              {contact.phoneLabel}
+            </dt>
+            <dd class="mt-1 pl-8">
+              <a href={phoneHref} class={infoLinkClass}>
+                {site.contact.phone}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class={infoTitleClass}>
+              <Icon name="mail" class="size-5" />
+              {contact.emailLabel}
+            </dt>
+            <dd class="mt-1 pl-8 break-all">
+              <a href={emailHref} class={infoLinkClass}>
+                {site.contact.email}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt class={infoTitleClass}>
+              <Icon name="pin" class="size-5" />
+              {contact.addressTitle}
+            </dt>
+            <dd class="mt-1 pl-8">
+              <address class="not-italic">{fullAddress}</address>
+            </dd>
+          </div>
+          <div>
+            <dt class={infoTitleClass}>
+              <Icon name="clock" class="size-5" />
+              {contact.hoursTitle}
+            </dt>
+            {site.hours.map((h) => (
+              <dd class="mt-1 pl-8">
+                {h.label}, {h.opens} a {h.closes}
+              </dd>
+            ))}
+          </div>
+        </dl>
+
+        <!-- El mapa carga en diferido: no frena la carga inicial de la página. -->
+        <iframe
+          src={mapEmbedUrl}
+          title={contact.mapTitle}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="aspect-4/3 w-full border border-azul/15"
+        ></iframe>
+
+        <Button
+          href={directionsUrl}
+          variant="outline"
+          target="_blank"
+          rel="noopener"
+        >
+          {contact.directionsLabel}
+          <span class="sr-only">{contact.newTabNote}</span>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
