@@ -116,6 +116,7 @@ export const content = {
     eyebrow: "Áreas de práctica",
     title: "En qué le podemos ayudar",
     casesLabel: "Casos frecuentes",
+    cta: { label: "Agendar consulta", href: "/#contacto" },
   },
   team: {
     eyebrow: "Equipo",
@@ -127,12 +128,15 @@ export const content = {
     eyebrow: "Cómo trabajamos",
     title: "Tres pasos, sin enredos",
     subtitle: "Si nunca ha ido a un abogado, así es el proceso.",
+    cta: { label: "Dar el primer paso", href: "/#contacto" },
   },
   onlineBanner: {
     text: "Atendemos en todo Chile por videollamada",
+    detail: "Desde su casa, con la misma abogada de principio a fin.",
     cta: { label: "Agendar videollamada" },
     whatsappMessage:
       "Hola, quisiera agendar una consulta online por videollamada.",
+    newTabNote: "(se abre en otra pestaña)",
   },
   testimonials: {
     eyebrow: "Testimonios",

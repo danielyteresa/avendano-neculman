@@ -1,0 +1,36 @@
+---
+import { content } from "../data/site";
+import { practiceAreas } from "../data/practiceAreas";
+import Button from "./ui/Button.astro";
+import SectionTitle from "./ui/SectionTitle.astro";
+import PracticeCard from "./PracticeCard.astro";
+
+const { practiceAreas: text } = content;
+---
+
+<section id="areas" aria-labelledby="areas-titulo" class="py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionTitle id="areas-titulo" eyebrow={text.eyebrow} title={text.title} />
+
+    <!--
+      Truco para las líneas finas: el grid tiene fondo azul muy suave y 1 px
+      de separación (gap-px); cada tarjeta tapa el fondo, así que solo se ven
+      las rayas entre ellas.
+    -->
+    <ul class="reveal grid gap-px border border-azul/15 bg-azul/15 sm:grid-cols-2 lg:grid-cols-4">
+      {practiceAreas.map((area, index) => (
+        <li class="flex">
+          <PracticeCard
+            area={area}
+            index={index}
+            casesLabel={text.casesLabel}
+          />
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-12">
+      <Button href={text.cta.href}>{text.cta.label}</Button>
+    </div>
+  </div>
+</section>

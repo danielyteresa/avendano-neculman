@@ -1,0 +1,46 @@
+---
+import { content } from "../data/site";
+import { processSteps } from "../data/process";
+import Button from "./ui/Button.astro";
+import SectionTitle from "./ui/SectionTitle.astro";
+
+const { process: text } = content;
+---
+
+<section
+  id="como-trabajamos"
+  aria-labelledby="como-trabajamos-titulo"
+  class="border-t border-azul/10 py-20 md:py-28"
+>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionTitle
+      id="como-trabajamos-titulo"
+      eyebrow={text.eyebrow}
+      title={text.title}
+      subtitle={text.subtitle}
+    />
+
+    <!-- Lista ordenada: el lector de pantalla anuncia "paso 1 de 3". -->
+    <ol class="grid gap-12 md:grid-cols-3 md:gap-10">
+      {processSteps.map((step) => (
+        <li class="reveal border-t border-azul/15 pt-8">
+          {/* Número grande en dorado oscuro: el dorado claro no llega a 3:1 sobre el fondo. */}
+          <span
+            class="block font-display text-7xl leading-none text-dorado-oscuro"
+            aria-hidden="true"
+          >
+            {step.number}
+          </span>
+          <h3 class="mt-6 text-2xl">{step.title}</h3>
+          <p class="mt-3 leading-relaxed">{step.description}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-14">
+      <Button href={text.cta.href} variant="outline">
+        {text.cta.label}
+      </Button>
+    </div>
+  </div>
+</section>

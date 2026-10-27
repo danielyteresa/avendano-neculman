@@ -1,0 +1,29 @@
+---
+import { content } from "../data/site";
+import { team } from "../data/team";
+import SectionTitle from "./ui/SectionTitle.astro";
+import TeamMember from "./TeamMember.astro";
+
+const { team: text } = content;
+---
+
+<section
+  id="equipo"
+  aria-labelledby="equipo-titulo"
+  class="border-t border-azul/10 py-20 md:py-28"
+>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionTitle
+      id="equipo-titulo"
+      eyebrow={text.eyebrow}
+      title={text.title}
+      subtitle={text.subtitle}
+    />
+
+    <div class="grid gap-16 md:grid-cols-2 md:gap-12 lg:gap-20">
+      {team.map((member) => (
+        <TeamMember member={member} />
+      ))}
+    </div>
+  </div>
+</section>

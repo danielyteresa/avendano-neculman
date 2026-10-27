@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import type { TeamMember } from "../data/types";
+import { getImage } from "../lib/images";
+
+interface Props {
+  member: TeamMember;
+}
+
+const { member } = Astro.props;
+const photo = getImage(member.photo.file);
+// Mientras no haya foto real: iniciales sobre crema, sin imagen de stock.
+const initials = member.name
+  .split(" ")
+  .map((word) => word[0])
+  .join("");
+---
+
+<article class="reveal">
+  <div class="aspect-4/5 max-w-sm overflow-hidden bg-crema">
+    {photo ? (
+      <Image
+        src={photo}
+        alt={member.photo.alt}
+        width={640}
+        widths={[320, 640, 960]}
+        sizes="(min-width: 768px) 40vw, 100vw"
+        class="size-full object-cover saturate-50"
+      />
+    ) : (
+      <div
+        class="flex size-full items-center justify-center font-display text-8xl text-azul/30"
+        aria-hidden="true"
+      >
+        {initials}
+      </div>
+    )}
+  </div>
+  <h3 class="mt-8 text-3xl">{member.name}</h3>
+  <p class="mt-2 text-xs font-semibold tracking-[0.25em] text-dorado-oscuro uppercase">
+    {member.role}
+  </p>
+  <p class="mt-5 max-w-md leading-relaxed">{member.bio}</p>
+</article>
