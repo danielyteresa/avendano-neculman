@@ -1,0 +1,117 @@
+---
+import { content, site } from "../data/site";
+import { emailHref, fullAddress, phoneHref, whatsappUrl } from "../lib/links";
+import Icon from "./ui/Icon.astro";
+import Logo from "./Logo.astro";
+
+const { footer } = content;
+const year = new Date().getFullYear();
+// inline-block + py-1: área táctil de al menos 24 px de alto.
+const linkClass =
+  "inline-block py-1 underline-offset-4 hover:text-dorado hover:underline";
+const titleClass =
+  "mb-4 font-sans text-xs font-semibold tracking-[0.25em] text-dorado uppercase";
+---
+
+<!-- pb-28 en móvil: deja espacio para el botón flotante de WhatsApp. -->
+<footer class="bg-azul pb-28 text-crema md:pb-0">
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+    <div class="space-y-4 lg:col-span-2">
+      <Logo />
+      <p class="max-w-xs text-sm text-crema/80">{site.slogan}</p>
+    </div>
+
+    <div>
+      <h2 class={titleClass}>{footer.contactTitle}</h2>
+      <address class="space-y-1 text-sm text-crema/80 not-italic">
+        <p>{fullAddress}</p>
+        <p>
+          <a href={phoneHref} class={linkClass}>
+            {site.contact.phone}
+          </a>
+        </p>
+        <p>
+          <a href={emailHref} class={linkClass}>
+            {site.contact.email}
+          </a>
+        </p>
+        <p>
+          <a
+            href={whatsappUrl()}
+            target="_blank"
+            rel="noopener"
+            class={linkClass}
+          >
+            {footer.whatsappLabel}
+            <span class="sr-only">{footer.newTabNote}</span>
+          </a>
+        </p>
+      </address>
+    </div>
+
+    <div class="space-y-8">
+      <div>
+        <h2 class={titleClass}>{footer.hoursTitle}</h2>
+        <dl class="space-y-1 text-sm text-crema/80">
+          {site.hours.map((h) => (
+            <div>
+              <dt>{h.label}</dt>
+              <dd>
+                {h.opens} – {h.closes}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div>
+        <h2 class={titleClass}>{footer.socialTitle}</h2>
+        <ul class="flex gap-2">
+          {site.social.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex size-11 items-center justify-center rounded-sm border border-crema/25 hover:border-dorado hover:text-dorado"
+              >
+                <Icon name={s.network} class="size-5" />
+                <span class="sr-only">
+                  {s.name} {footer.newTabNote}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-crema/15">
+    <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-xs text-crema/75 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+      <p>{footer.disclaimer}</p>
+      <p class="flex flex-wrap items-center gap-x-4">
+        <span>
+          © {year} {site.name}
+        </span>
+        <a href={content.contact.privacy.href} class={linkClass}>
+          {footer.privacyLabel}
+        </a>
+        <span>
+          {footer.creditPrefix}{" "}
+          <a
+            href={site.developer.githubUrl}
+            target="_blank"
+            rel="noopener"
+            class={linkClass}
+          >
+            {site.developer.name}
+            <span class="sr-only">
+              · {footer.githubLabel} {footer.newTabNote}
+            </span>
+          </a>
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>

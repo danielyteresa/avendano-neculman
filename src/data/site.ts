@@ -5,6 +5,8 @@ import type { NavLink, OpeningHours, SocialLink } from "./types";
 export const site = {
   name: "Avendaño & Neculman",
   fullName: "Avendaño & Neculman · Asesoría Jurídica Temuco",
+  /** Línea en versalitas bajo el nombre, como en el logo. */
+  tagline: "Asesoría Jurídica Temuco",
   // Eslogan propuesto: por validar con las abogadas.
   slogan: "Asesoría jurídica cercana, en Temuco y online",
   title:
@@ -102,9 +104,13 @@ export const content = {
       "Abogadas en Temuco para temas de familia, inmobiliarios, civiles y laborales",
     subtitle:
       "Le explicamos su caso con palabras simples y usted habla directamente con su abogada.",
-    primaryCta: { label: "Escríbanos por WhatsApp" },
+    primaryCta: {
+      label: "Escríbanos por WhatsApp",
+      whatsappMessage: "Hola, quisiera agendar una consulta con el estudio.",
+    },
     secondaryCta: { label: "Ver áreas", href: "/#areas" },
     note: "Atención presencial y online",
+    newTabNote: "(se abre en otra pestaña)",
   },
   practiceAreas: {
     eyebrow: "Áreas de práctica",
@@ -195,7 +201,9 @@ export const content = {
   },
   footer: {
     contactTitle: "Contacto",
+    hoursTitle: "Horario",
     socialTitle: "Síganos",
+    whatsappLabel: "WhatsApp",
     disclaimer:
       "La información de este sitio es general y no constituye asesoría legal.",
     creditPrefix: "Sitio desarrollado por",
@@ -204,6 +212,7 @@ export const content = {
     newTabNote: "(se abre en otra pestaña)",
   },
   whatsappFloat: {
-    label: "Escríbanos por WhatsApp",
+    label: "Escríbanos por WhatsApp (se abre en otra pestaña)",
+    whatsappMessage: "Hola, quisiera agendar una consulta con el estudio.",
   },
 } as const;

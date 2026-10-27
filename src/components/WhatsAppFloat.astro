@@ -1,0 +1,19 @@
+---
+// Botón flotante de WhatsApp: solo en móvil (md:hidden), donde es el atajo más usado.
+// Azul con borde dorado: se distingue tanto sobre el fondo claro como sobre el hero azul.
+import { content } from "../data/site";
+import { whatsappUrl } from "../lib/links";
+import Icon from "./ui/Icon.astro";
+
+const { whatsappFloat } = content;
+---
+
+<a
+  href={whatsappUrl(whatsappFloat.whatsappMessage)}
+  target="_blank"
+  rel="noopener"
+  aria-label={whatsappFloat.label}
+  class="fixed right-4 bottom-4 z-30 inline-flex size-14 items-center justify-center rounded-full border border-dorado bg-azul text-dorado md:hidden"
+>
+  <Icon name="whatsapp" class="size-7" />
+</a>

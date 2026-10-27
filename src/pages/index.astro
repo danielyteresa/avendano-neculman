@@ -1,66 +1,17 @@
 ---
-// Página temporal (fase 3): muestra el sistema de diseño para revisarlo en `npm run dev`.
-// En la fase 4 se reemplaza por las secciones reales.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Button from "../components/ui/Button.astro";
-import SectionTitle from "../components/ui/SectionTitle.astro";
-import { content } from "../data/site";
-import { practiceAreas } from "../data/practiceAreas";
-import { whatsappUrl } from "../lib/links";
-
-const { hero, practiceAreas: areasText, onlineBanner } = content;
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 ---
 
 <BaseLayout>
-  <main>
-    <section aria-labelledby="demo-azul" class="bg-azul px-4 py-24">
-      <div class="mx-auto max-w-5xl">
-        <SectionTitle
-          id="demo-azul"
-          tone="dark"
-          eyebrow={hero.eyebrow}
-          title={hero.title}
-          subtitle={hero.subtitle}
-        />
-        <div class="flex flex-wrap gap-4">
-          <Button href={whatsappUrl()} variant="gold">
-            {hero.primaryCta.label}
-          </Button>
-          <Button href={hero.secondaryCta.href} variant="outline-light">
-            {hero.secondaryCta.label}
-          </Button>
-        </div>
-      </div>
-    </section>
-
-    <section aria-labelledby="areas" class="px-4 py-24">
-      <div class="mx-auto max-w-5xl">
-        <SectionTitle
-          id="areas"
-          eyebrow={areasText.eyebrow}
-          title={areasText.title}
-        />
-        <ul class="grid divide-y divide-azul/15 sm:grid-cols-2 sm:divide-y-0">
-          {practiceAreas.map((area) => (
-            <li class="py-6 sm:p-6">
-              <h3 class="text-2xl">{area.title}</h3>
-              <p class="mt-2">{area.summary}</p>
-            </li>
-          ))}
-        </ul>
-        <div class="mt-10 flex flex-wrap gap-4">
-          <Button href="/#contacto">{content.header.cta.label}</Button>
-          <Button href="/#contacto" variant="outline">
-            {content.header.cta.label}
-          </Button>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-crema px-4 py-12">
-      <p class="mx-auto max-w-5xl font-display text-2xl text-azul">
-        {onlineBanner.text}
-      </p>
-    </section>
+  <Header />
+  <main id="contenido" tabindex="-1" class="outline-none">
+    <Hero />
+    <!-- Fase 5: Áreas, Equipo, Cómo trabajamos y Atención online -->
   </main>
+  <Footer />
+  <WhatsAppFloat />
 </BaseLayout>

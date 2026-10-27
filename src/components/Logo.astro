@@ -1,0 +1,24 @@
+---
+// Logo provisorio para fondo azul: balanza dorada + nombre en serif + versalitas.
+// Cuando llegue el archivo original del estudio, reemplazar por <Image />.
+import { site } from "../data/site";
+import Scales from "./ui/Scales.astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class:list={["inline-flex items-center gap-3", className]}>
+  <Scales class="size-9 shrink-0 text-dorado" />
+  <span class="flex flex-col">
+    <span class="font-display text-xl leading-none font-semibold text-crema sm:text-2xl">
+      {site.name}
+    </span>
+    <span class="mt-1 text-[0.625rem] leading-none tracking-[0.25em] text-dorado uppercase">
+      {site.tagline}
+    </span>
+  </span>
+</span>
