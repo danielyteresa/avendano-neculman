@@ -12,24 +12,25 @@ const { hero } = content;
   aria-labelledby="hero-titulo"
   class="relative isolate overflow-hidden bg-azul text-crema"
 >
-  <!-- Sin foto de fondo: solo la balanza del logo, grande y casi transparente. -->
+  <!-- Sin foto de fondo: solo la balanza del logo, grande y casi transparente.
+       Sin animación "reveal": el hero ya está en pantalla al cargar. -->
   <Scales class="absolute top-1/2 right-0 -z-10 size-[28rem] translate-x-1/4 -translate-y-1/2 text-dorado opacity-10 sm:size-[36rem] lg:translate-x-0" />
 
   <div class="mx-auto flex min-h-[calc(85svh-4.5rem)] max-w-6xl flex-col justify-center px-4 py-24 sm:px-6">
-    <p class="reveal text-xs font-semibold tracking-[0.25em] text-dorado uppercase">
+    <p class="text-xs font-semibold tracking-[0.25em] text-dorado uppercase">
       {hero.eyebrow}
     </p>
     <h1
       id="hero-titulo"
-      class="reveal mt-6 max-w-4xl text-5xl leading-[1.05] text-crema sm:text-6xl lg:text-7xl"
+      class="mt-6 max-w-4xl text-5xl leading-[1.05] text-crema sm:text-6xl lg:text-7xl"
     >
       {hero.title}
     </h1>
     <span aria-hidden="true" class="mt-8 block h-px w-16 bg-dorado"></span>
-    <p class="reveal mt-8 max-w-xl text-lg leading-relaxed text-crema/90">
+    <p class="mt-8 max-w-xl text-lg leading-relaxed text-crema/90">
       {hero.subtitle}
     </p>
-    <div class="reveal mt-10 flex flex-col gap-3 sm:flex-row">
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
       <Button
         href={whatsappUrl(hero.primaryCta.whatsappMessage)}
         variant="gold"
@@ -44,6 +45,6 @@ const { hero } = content;
         {hero.secondaryCta.label}
       </Button>
     </div>
-    <p class="reveal mt-8 text-sm text-crema/75">{hero.note}</p>
+    <p class="mt-8 text-sm text-crema/75">{hero.note}</p>
   </div>
 </section>

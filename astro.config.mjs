@@ -6,8 +6,8 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   // URL pública del sitio: la usan el sitemap, el JSON-LD y las etiquetas para redes.
-  // Si cambias el nombre del sitio en Netlify (o usas un dominio propio), actualízala aquí.
-  site: "https://avendano-neculman.netlify.app",
+  // Nombre provisorio en Netlify. Cuando el estudio compre su dominio (.cl o .com), cámbiala aquí.
+  site: "https://asesoriajuridicatco.netlify.app",
   // La página de gracias del formulario no se incluye en el sitemap.
   integrations: [sitemap({ filter: (page) => !page.includes("/gracias") })],
   // Astro descarga las fuentes de Google y las sirve desde tu propio sitio,
