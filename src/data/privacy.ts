@@ -33,7 +33,7 @@ export const privacy = {
       items: [
         "Nombre y correo electrónico, para responderle.",
         "Teléfono, solo si usted quiere que le llamemos (es opcional).",
-        "El área de su consulta, la modalidad que prefiere y un mensaje breve, para saber cómo ayudarle.",
+        "La materia de su consulta, la modalidad que prefiere y un mensaje breve, para saber cómo ayudarle.",
       ],
       paragraphs: [
         "Le pedimos no incluir en el mensaje datos sensibles, como información de salud o de terceros. Esos temas los conversaremos en la reunión, con la reserva propia del secreto profesional.",

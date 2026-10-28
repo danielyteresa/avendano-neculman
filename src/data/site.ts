@@ -83,7 +83,7 @@ export const site = {
   ] satisfies SocialLink[],
 
   nav: [
-    { label: "Áreas", href: "/#areas" },
+    { label: "Materias", href: "/#materias" },
     { label: "Equipo", href: "/#equipo" },
     { label: "Cómo trabajamos", href: "/#como-trabajamos" },
     { label: "Contacto", href: "/#contacto" },
@@ -115,12 +115,12 @@ export const content = {
       label: "Escríbanos por WhatsApp",
       whatsappMessage: "Hola, quisiera agendar una consulta con el estudio.",
     },
-    secondaryCta: { label: "Ver áreas", href: "/#areas" },
+    secondaryCta: { label: "Ver materias", href: "/#materias" },
     note: "Atención presencial y online",
     newTabNote: "(se abre en otra pestaña)",
   },
   practiceAreas: {
-    eyebrow: "Áreas de práctica",
+    eyebrow: "Materias",
     title: "En qué le podemos ayudar",
     casesLabel: "Casos frecuentes",
     cta: { label: "Agendar consulta", href: "/#contacto" },
@@ -184,7 +184,7 @@ export const content = {
       name: "Nombre",
       email: "Correo",
       phone: "Teléfono (opcional)",
-      area: "Área de su consulta",
+      area: "Materia de su consulta",
       modality: "¿Cómo prefiere la reunión?",
       message: "Cuéntenos brevemente su caso",
     },
@@ -197,7 +197,7 @@ export const content = {
     /** Aviso bajo el mensaje (no en el placeholder, que desaparece al escribir). */
     messageHint:
       "Basta con unas líneas. No incluya datos sensibles como diagnósticos o RUT; los conversaremos en la reunión.",
-    areaPlaceholder: "Seleccione un área",
+    areaPlaceholder: "Seleccione una materia",
     areaOther: "Otro / no estoy seguro",
     modalities: [
       { value: "presencial", label: "Presencial en Temuco" },

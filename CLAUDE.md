@@ -34,5 +34,5 @@ Fuentes: Cormorant Garamond (títulos), Inter (texto).
 
 - Fases 2 a 8 listas. Lighthouse móvil: 100 en las cuatro categorías.
 - Primera consulta: $25.000 (site.firstConsultationFee). Conservación de datos: un año.
-- Pendiente de las abogadas: logo en alta resolución, fotos, casos típicos por área, biografías, eslogan, URL completa de Facebook, revisión de /privacidad, autorización para el portafolio.
+- Pendiente de las abogadas: logo en alta resolución, fotos, casos típicos por materia, biografías, eslogan, URL completa de Facebook, revisión de /privacidad, autorización para el portafolio.
 - Fase 9: deploy en Netlify, aviso por correo del formulario a la casilla del estudio, README con capturas.

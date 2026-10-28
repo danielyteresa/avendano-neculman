@@ -14,7 +14,7 @@ Sitio web de una sola página para **Avendaño & Neculman**, un estudio jurídic
 ## Qué incluye
 
 - **Diseño minimalista:** fondo claro, azul solo en header, hero y footer; títulos serif grandes, sin sombras ni degradados, un objetivo por pantalla: agendar una consulta.
-- **9 bloques:** header con menú móvil, hero, áreas de práctica, equipo, cómo trabajamos, atención online, testimonios (desactivados), preguntas frecuentes, contacto con mapa y footer.
+- **9 bloques:** header con menú móvil, hero, materias, equipo, cómo trabajamos, atención online, testimonios (desactivados), preguntas frecuentes, contacto con mapa y footer.
 - **WhatsApp como canal principal:** botones con el mensaje ya escrito y botón flotante solo en móvil.
 - **Formulario de contacto** con [Netlify Forms](https://docs.netlify.com/forms/setup/): validación nativa, casilla de privacidad obligatoria, campo anti-spam y página `/gracias`.
 - **Página `/privacidad`** que explica qué datos se piden, para qué y cómo ejercer los derechos (Ley 19.628 y Ley 21.719).
@@ -69,7 +69,7 @@ Abre http://localhost:4321.
 src/
 ├── assets/images/   fotos del equipo (Astro las optimiza a WebP)
 ├── components/      una sección por componente + ui/ (Button, SectionTitle, Icon, Scales)
-├── data/            todos los textos y datos: site, áreas, equipo, pasos, FAQ, testimonios, privacidad
+├── data/            todos los textos y datos: site, materias, equipo, pasos, FAQ, testimonios, privacidad
 ├── layouts/         BaseLayout: <head>, SEO, Open Graph y JSON-LD
 ├── lib/             enlaces (WhatsApp, mapa), imágenes y formato de precios
 ├── pages/           index (solo ensambla secciones), privacidad, gracias y robots.txt
@@ -95,14 +95,14 @@ Ningún texto, dato de contacto ni enlace está escrito dentro de los componente
 ## Pendientes del estudio
 
 - Logo original en alta resolución (el actual es provisorio) y fotos de las abogadas (`src/assets/images/` + `photo.file` en `src/data/team.ts`).
-- Aprobar los textos: casos típicos por área, biografías, eslogan y política de privacidad.
+- Aprobar los textos: casos típicos por materia, biografías, eslogan y política de privacidad.
 - URL completa de la página de Facebook para el JSON-LD (`profileUrl` en `src/data/site.ts`).
 - Testimonios reales con autorización escrita; luego `showTestimonials: true`.
 - Autorización escrita para mostrar el sitio en el portafolio.
 
 ## Siguiente paso
 
-Una página por área de práctica (`/familia`, `/inmobiliario`, `/civil`, `/laboral`), que es lo que más ayuda al SEO local.
+Una página por materia (`/familia`, `/inmobiliario`, `/civil`, `/laboral`), que es lo que más ayuda al SEO local.
 
 ---
 
