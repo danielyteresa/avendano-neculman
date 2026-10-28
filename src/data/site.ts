@@ -10,7 +10,7 @@ export const site = {
   // Eslogan propuesto: por validar con las abogadas.
   slogan: "Asesoría jurídica cercana, en Temuco y online",
   title:
-    "Abogadas en Temuco · Familia, Inmobiliario, Civil y Laboral · Avendaño & Neculman",
+    "Asesoría Jurídica Temuco · Familia, Inmobiliario, Civil y Laboral · Avendaño & Neculman",
   description:
     "Estudio jurídico en Temuco. Abogadas de familia, inmobiliario, civil y laboral, con atención presencial y online para todo Chile. Agende su consulta por WhatsApp.",
   lang: "es-CL",
