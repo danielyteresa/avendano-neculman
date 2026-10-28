@@ -97,20 +97,22 @@ const titleClass =
         <a href={content.contact.privacy.href} class={linkClass}>
           {footer.privacyLabel}
         </a>
-        <span>
-          {footer.creditPrefix}{" "}
-          <a
-            href={site.developer.githubUrl}
-            target="_blank"
-            rel="noopener"
-            class={linkClass}
-          >
-            {site.developer.name}
-            <span class="sr-only">
-              · {footer.githubLabel} {footer.newTabNote}
-            </span>
-          </a>
-        </span>
+        {site.developer.showCredit && (
+          <span>
+            {footer.creditPrefix}{" "}
+            <a
+              href={site.developer.githubUrl}
+              target="_blank"
+              rel="noopener"
+              class={linkClass}
+            >
+              {site.developer.name}
+              <span class="sr-only">
+                · {footer.githubLabel} {footer.newTabNote}
+              </span>
+            </a>
+          </span>
+        )}
       </p>
     </div>
   </div>

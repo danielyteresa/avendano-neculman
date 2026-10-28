@@ -89,8 +89,9 @@ export const site = {
     { label: "Contacto", href: "/#contacto" },
   ] satisfies NavLink[],
 
-  /** Crédito del footer. */
+  /** Crédito del footer. Oculto a pedido; cambie showCredit a true para mostrarlo. */
   developer: {
+    showCredit: false,
     name: "Daniel y Tere",
     githubUrl: "https://github.com/danielyteresa/avendano-neculman",
   },
